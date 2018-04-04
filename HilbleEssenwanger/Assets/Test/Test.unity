@@ -360,12 +360,12 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -657,11 +657,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da719a97d62083549ac3eeacac8e8fa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  palabra: jugador
+  palabra: hola
   outputText: {fileID: 963250532}
   inputText: {fileID: 1156931005}
   successSound: {fileID: 8300000, guid: 59bf1504ef786ce4991fa11d7ac88283, type: 3}
   failSound: {fileID: 8300000, guid: ec9535e940c47024bbe9d5b4ce4a5f5a, type: 3}
+  winSound: {fileID: 8300000, guid: e9a7ed399b4e4844aa697f4eb739b68e, type: 3}
   camSource: {fileID: 1031414871}
 --- !u!4 &1091316469
 Transform:
