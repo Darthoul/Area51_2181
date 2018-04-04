@@ -11,6 +11,10 @@ public class HangmanScript : MonoBehaviour {
     public Text outputText;
     public InputField inputText;
 
+    public AudioClip successSound;
+    public AudioClip failSound;
+    public AudioSource camSource;
+
 	// Use this for initialization
 	void Start () {
         inputText.Select ();
@@ -36,6 +40,9 @@ public class HangmanScript : MonoBehaviour {
                     }
                 }
                 palabraEscondida = palabraTemporal;
+                camSource.PlayOneShot (successSound);
+            } else {
+                camSource.PlayOneShot (failSound);
             }
             inputText.text = "";
             inputText.Select ();
