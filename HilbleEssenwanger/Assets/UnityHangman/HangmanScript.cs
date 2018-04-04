@@ -13,6 +13,7 @@ public class HangmanScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        inputText.Select ();
         foreach (char c in palabra) {
             palabraEscondida += "*";
         }
@@ -23,7 +24,7 @@ public class HangmanScript : MonoBehaviour {
         if (outputText.text != palabraEscondida) {
             outputText.text = palabraEscondida;
         }
-        if (Input.GetKeyDown (KeyCode.Return)) {
+        if (Input.GetKeyDown (KeyCode.Return) && !string.IsNullOrEmpty(inputText.text)) {
             string letra = inputText.text.Substring (0, 1);
             if (palabra.Contains(letra)) {
                 string palabraTemporal = "";
@@ -37,6 +38,8 @@ public class HangmanScript : MonoBehaviour {
                 palabraEscondida = palabraTemporal;
             }
             inputText.text = "";
+            inputText.Select ();
+            inputText.ActivateInputField ();
         }
         if (palabraEscondida == palabra) {
             Debug.Log ("FELICIDADES!");
