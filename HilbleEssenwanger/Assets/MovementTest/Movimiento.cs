@@ -30,8 +30,9 @@ public class Movimiento : MonoBehaviour {
         if (Input.GetKey (KeyCode.S) && transform.position.z > -limit.z) {
             playerRB.MovePosition (transform.position + (Vector3.back * speed * Time.deltaTime));
         }
-        if (Input.GetKeyDown (KeyCode.Space)) {
-            transform.position = initialPos;
-        }
 	}
+
+    public void ResetPosition () {
+        transform.position = initialPos;
+    }
 }
