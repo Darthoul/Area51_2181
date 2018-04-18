@@ -372,6 +372,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetLight: {fileID: 1392627847}
+--- !u!4 &875398634 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4040909006736804, guid: 8815d1b38ad57864695b915cbfc59905,
+    type: 2}
+  m_PrefabInternal: {fileID: 1087636682}
 --- !u!1 &1082305206
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,7 +722,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToSpawn: {fileID: 1174022956771580, guid: d5cb696d351e91b469462465624b14ed,
     type: 2}
+  objectToFollow: {fileID: 1082305212}
   spawnPossible: 1
+  lightBox: {fileID: 875398634}
 --- !u!1 &1921696039
 GameObject:
   m_ObjectHideFlags: 0
