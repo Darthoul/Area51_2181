@@ -5,10 +5,11 @@ using UnityEngine;
 public class BulletBehaviour : MonoBehaviour {
 
     public float speed = 1;
+    SpriteRenderer spriteRenderer;
 
 	// Use this for initialization
 	void Start () {
-		
+        spriteRenderer = GetComponent<SpriteRenderer> ();
 	}
 	
 	// Update is called once per frame
@@ -17,8 +18,11 @@ public class BulletBehaviour : MonoBehaviour {
 	}
 
     void OnTriggerEnter2D (Collider2D other) {
-        if (other.CompareTag ("Block")) {
-            Destroy (other.gameObject);
+        SpriteRenderer otherRenderer = other.GetComponent<SpriteRenderer>();
+        if (otherRenderer != null && other.CompareTag ("Block")) {
+            int targetAmmount = (otherRenderer.color == spriteRenderer.color) ? 5 : 2;
+            other.GetComponent<BlockEntity> ().DecreaseLife (targetAmmount);
+            Destroy (gameObject);
         }
     }
 }
