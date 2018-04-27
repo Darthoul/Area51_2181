@@ -14,6 +14,9 @@ public class TopDownShooterMovement : MonoBehaviour {
 
     public SpriteRenderer spriteRenderer;
     public Transform sightDirection;
+    public Transform sightObject;
+
+    public LineRenderer sightLine;
 
     class Axis {
         public string name;
@@ -31,6 +34,7 @@ public class TopDownShooterMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        Cursor.visible = false;
         spriteRenderer.color = colors[colorIndex];
         axisList.Add (new Axis ("Horizontal", KeyCode.A, KeyCode.D));
         axisList.Add (new Axis ("Vertical", KeyCode.S, KeyCode.W));
@@ -47,7 +51,10 @@ public class TopDownShooterMovement : MonoBehaviour {
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
         mouseWorldPos.z = transform.position.z;
         Debug.DrawLine (transform.position, mouseWorldPos, Color.red);
+        
         sightDirection.up = (mouseWorldPos - transform.position).normalized;
+        sightObject.position = (Vector3.Distance (mouseWorldPos, transform.position) >= 1) ? mouseWorldPos : transform.position + sightDirection.up;
+        sightLine.SetPositions (new Vector3[] { transform.position, transform.position + sightDirection.up * 3 });
 
         float scrollWheelValue = Input.GetAxis ("Mouse ScrollWheel");
 
