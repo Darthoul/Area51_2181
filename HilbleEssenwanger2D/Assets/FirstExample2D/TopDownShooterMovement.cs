@@ -11,6 +11,7 @@ public class TopDownShooterMovement : MonoBehaviour {
 
     public List<Color> colors = new List<Color> ();
     int colorIndex = 0;
+    public int ColorIndex { get { return colorIndex; } }
 
     public SpriteRenderer spriteRenderer;
     public Transform sightDirection;
