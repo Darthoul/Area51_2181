@@ -18,6 +18,7 @@ public class TopDownShooterMovement : MonoBehaviour {
     public Transform sightObject;
 
     public LineRenderer sightLine;
+    Vector3 mouseWorldPos;
 
     class Axis {
         public string name;
@@ -49,18 +50,17 @@ public class TopDownShooterMovement : MonoBehaviour {
         transform.Translate (Vector3.up * GetAxis ("Vertical") * speed * Time.deltaTime, Space.World);
         //sightDirection.Rotate (Vector3.back * GetAxis ("Arrow_H") * angularVelocity * Time.deltaTime);
 
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+        mouseWorldPos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
         mouseWorldPos.z = transform.position.z;
         Debug.DrawLine (transform.position, mouseWorldPos, Color.red);
         
         sightDirection.up = (mouseWorldPos - transform.position).normalized;
-        sightObject.position = (Vector3.Distance (mouseWorldPos, transform.position) >= 1) ? mouseWorldPos : transform.position + sightDirection.up;
         sightLine.SetPositions (new Vector3[] { transform.position, transform.position + sightDirection.up * 3 });
 
         float scrollWheelValue = Input.GetAxis ("Mouse ScrollWheel");
 
         if (scrollWheelValue != 0) {
-            MoveColor (scrollWheelValue);
+            MoveColor (-scrollWheelValue);
         }
 
         if (Input.GetMouseButtonDown (0)) {
@@ -68,10 +68,17 @@ public class TopDownShooterMovement : MonoBehaviour {
         }
 	}
 
+    void LateUpdate () {
+        sightObject.position = (Vector3.Distance (mouseWorldPos, transform.position) >= 1) ? mouseWorldPos : transform.position + sightDirection.up;
+    }
+
     void Shoot () {
         SpriteRenderer tempRenderer = Instantiate (bullet, sightDirection.Find ("Cannon").position, sightDirection.rotation).GetComponent<SpriteRenderer> ();
         tempRenderer.color = spriteRenderer.color;
         Destroy (tempRenderer.gameObject, 2);
+        TopDownCamMovement camera = Camera.main.GetComponent<TopDownCamMovement> ();
+        camera.speed = 25;
+        camera.impulseDirection = sightDirection.up;
     }
 
     void MoveColor (float moveValue) {
