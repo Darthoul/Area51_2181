@@ -53,8 +53,6 @@ public class TopDownShooterMovementWithRigidbody2D : MonoBehaviour {
         velocity.y = GetAxis("Vertical") * speed;
 
 
-        //transform.Translate (Vector3.right * GetAxis ("Horizontal") * speed * Time.deltaTime, Space.World);
-        //transform.Translate (Vector3.up * GetAxis ("Vertical") * speed * Time.deltaTime, Space.World);
         //sightDirection.Rotate (Vector3.back * GetAxis ("Arrow_H") * angularVelocity * Time.deltaTime);
 
         mouseWorldPos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
@@ -78,12 +76,6 @@ public class TopDownShooterMovementWithRigidbody2D : MonoBehaviour {
     void LateUpdate () {
         sightObject.position = (Vector3.Distance (mouseWorldPos, transform.position) >= 1) ? mouseWorldPos : transform.position + sightDirection.up;
 
-
-        //if (wall) {
-        //    Vector3 dir = wall.transform.position - transform.position;
-        //    transform.position -= dir * 0.4f;
-        //    wall = null;
-        //}
 
         rigidbody2D.velocity = velocity;
     }
