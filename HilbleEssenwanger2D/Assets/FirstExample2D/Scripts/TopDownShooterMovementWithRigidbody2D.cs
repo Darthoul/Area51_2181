@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TopDownShooterMovement : MonoBehaviour {
+public class TopDownShooterMovementWithRigidbody2D : MonoBehaviour {
 
     public float speed = 1;
     public float angularVelocity = 1;
@@ -20,7 +20,8 @@ public class TopDownShooterMovement : MonoBehaviour {
     public LineRenderer sightLine;
     Vector3 mouseWorldPos;
 
-    private GameObject wall;
+    public Rigidbody2D rigidbody2D;
+    Vector3 velocity;
 
     class Axis {
         public string name;
@@ -47,9 +48,13 @@ public class TopDownShooterMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        velocity = Vector3.zero;
+        velocity.x = GetAxis("Horizontal") * speed;
+        velocity.y = GetAxis("Vertical") * speed;
 
-        transform.Translate (Vector3.right * GetAxis ("Horizontal") * speed * Time.deltaTime, Space.World);
-        transform.Translate (Vector3.up * GetAxis ("Vertical") * speed * Time.deltaTime, Space.World);
+
+        //transform.Translate (Vector3.right * GetAxis ("Horizontal") * speed * Time.deltaTime, Space.World);
+        //transform.Translate (Vector3.up * GetAxis ("Vertical") * speed * Time.deltaTime, Space.World);
         //sightDirection.Rotate (Vector3.back * GetAxis ("Arrow_H") * angularVelocity * Time.deltaTime);
 
         mouseWorldPos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
@@ -74,11 +79,13 @@ public class TopDownShooterMovement : MonoBehaviour {
         sightObject.position = (Vector3.Distance (mouseWorldPos, transform.position) >= 1) ? mouseWorldPos : transform.position + sightDirection.up;
 
 
-        if (wall) {
-            Vector3 dir = wall.transform.position - transform.position;
-            transform.position -= dir * 0.4f;
-            wall = null;
-        }
+        //if (wall) {
+        //    Vector3 dir = wall.transform.position - transform.position;
+        //    transform.position -= dir * 0.4f;
+        //    wall = null;
+        //}
+
+        rigidbody2D.velocity = velocity;
     }
 
     void Shoot () {
@@ -122,9 +129,6 @@ public class TopDownShooterMovement : MonoBehaviour {
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.CompareTag("Wall")) {
-            Debug.Log("Wall!");
-            wall = collision.gameObject;
-        }
+
     }
 }
