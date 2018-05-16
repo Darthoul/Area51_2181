@@ -49,3 +49,9 @@ TagManager:
   - name: player
     uniqueID: 990614465
     locked: 0
+  - name: collider
+    uniqueID: 2135346885
+    locked: 0
+  - name: bullet
+    uniqueID: 685621461
+    locked: 0
