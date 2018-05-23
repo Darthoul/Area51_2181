@@ -21,7 +21,12 @@ public class TopDownShooterMovementWithRigidbody2D : MonoBehaviour {
     Vector3 mouseWorldPos;
 
     public Rigidbody2D rigidbody2D;
-    Vector3 velocity;
+    public Animator animator;
+    public bool isMoving { get { return GetAxis (DIR_HORIZONTAL) != 0 || GetAxis (DIR_VERTICAL) != 0; } }
+
+    const string DIR_HORIZONTAL = "Horizontal";
+    const string DIR_VERTICAL = "Vertical";
+    const string LAST_MODIFIER = "Last";
 
     class Axis {
         public string name;
@@ -41,17 +46,25 @@ public class TopDownShooterMovementWithRigidbody2D : MonoBehaviour {
 	void Start () {
         Cursor.visible = false;
         //spriteRenderer.color = colors[colorIndex];
-        axisList.Add (new Axis ("Horizontal", KeyCode.A, KeyCode.D));
-        axisList.Add (new Axis ("Vertical", KeyCode.S, KeyCode.W));
+        axisList.Add (new Axis (DIR_HORIZONTAL, KeyCode.A, KeyCode.D));
+        axisList.Add (new Axis (DIR_VERTICAL, KeyCode.S, KeyCode.W));
         axisList.Add (new Axis ("Arrow_H", KeyCode.LeftArrow, KeyCode.RightArrow));
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        velocity = Vector3.zero;
-        velocity.x = GetAxis("Horizontal") * speed;
-        velocity.y = GetAxis("Vertical") * speed;
-
+        animator.SetBool ("Moving", isMoving);
+        Vector3 step = new Vector2(GetAxis(DIR_HORIZONTAL), GetAxis(DIR_VERTICAL));
+        if (isMoving) {
+            animator.SetFloat (LAST_MODIFIER + DIR_HORIZONTAL, animator.GetFloat (DIR_HORIZONTAL));
+            animator.SetFloat (LAST_MODIFIER + DIR_VERTICAL, animator.GetFloat (DIR_VERTICAL));
+        }
+        animator.SetFloat (DIR_HORIZONTAL, step.x);
+        animator.SetFloat (DIR_VERTICAL, step.y);
+        
+        
+        step *= speed * Time.deltaTime;
+        rigidbody2D.MovePosition (transform.position + step);
 
         //sightDirection.Rotate (Vector3.back * GetAxis ("Arrow_H") * angularVelocity * Time.deltaTime);
 
@@ -75,9 +88,6 @@ public class TopDownShooterMovementWithRigidbody2D : MonoBehaviour {
 
     void LateUpdate () {
         sightObject.position = (Vector3.Distance (mouseWorldPos, transform.position) >= 1) ? mouseWorldPos : transform.position + sightDirection.up;
-
-
-        rigidbody2D.velocity = velocity;
     }
 
     void Shoot () {
