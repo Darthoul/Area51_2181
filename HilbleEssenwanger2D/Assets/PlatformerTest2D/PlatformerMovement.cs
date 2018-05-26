@@ -21,15 +21,22 @@ public class PlatformerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        RaycastHit2D left = Physics2D.Raycast (leftNode, Vector3.down, 0.1f);
-        RaycastHit2D right = Physics2D.Raycast (rightNode, Vector3.down, 0.1f);
+        RaycastHit2D downLeft = Physics2D.Raycast (leftNode, Vector3.down, 0.1f);
+        RaycastHit2D downRight = Physics2D.Raycast (rightNode, Vector3.down, 0.1f);
+        RaycastHit2D sideLeft = Physics2D.Raycast (leftNode + new Vector3 (0, 0.1f, 0), Vector3.left, 0.1f);
+        RaycastHit2D sideRight = Physics2D.Raycast (rightNode + new Vector3 (0, 0.1f, 0), Vector3.right, 0.1f);
 
-        if (left || right) {
-            isGrounded = true;
-            verticalSpeed = 0;
-            CheckReposition (new RaycastHit2D[] { left, right });
+        if (downLeft || downRight) {
+            CheckReposition (new RaycastHit2D[] { downLeft, downRight });
         } else { 
             isGrounded = false; 
+        }
+        float horizontalDirection = Input.GetAxis ("Horizontal");
+        if (sideLeft && horizontalDirection < 0) {
+            horizontalDirection = 0;
+        }
+        if (sideRight && horizontalDirection > 0) {
+            horizontalDirection = 0;
         }
 
         if (!isGrounded) {
@@ -40,17 +47,21 @@ public class PlatformerMovement : MonoBehaviour {
                 isGrounded = false;
             }
         }
-        transform.Translate (Input.GetAxis ("Horizontal") * horizontalSpeed * Time.deltaTime, verticalSpeed * Time.deltaTime, 0);
+        transform.Translate (horizontalDirection * horizontalSpeed * Time.deltaTime, verticalSpeed * Time.deltaTime, 0);
 	}
 
     void CheckReposition (RaycastHit2D[] nodeRays) {
+        Debug.Log (verticalSpeed);
         foreach (RaycastHit2D ray in nodeRays) {
-            if (ray) {
+            if (ray && verticalSpeed <= 0) {
                 float distance = ray.collider.transform.localScale.y / 2;
                 float difference = (leftNode.y - ray.collider.transform.position.y) - distance;
-                if (difference != 0) {
+                if (Mathf.Abs(difference) <= 0.15f) {
                     transform.Translate (0, -difference, 0);
+                    isGrounded = true;
+                    verticalSpeed = 0;
                 }
+                Debug.DrawLine (transform.position + Vector3.down, ray.collider.transform.position, Color.green);
                 break;
             }
         }
