@@ -13,9 +13,12 @@ public class PlatformerMovement : MonoBehaviour {
     Vector3 rightNode { get { return transform.position + new Vector3 (0.5f, -1, 0); } }
 
     bool isGrounded;
+
+    SpriteRenderer spriteRenderer;
+
 	// Use this for initialization
 	void Start () {
-		
+        spriteRenderer = GetComponent<SpriteRenderer> ();
 	}
 	
 	// Update is called once per frame
@@ -32,11 +35,16 @@ public class PlatformerMovement : MonoBehaviour {
             isGrounded = false; 
         }
         float horizontalDirection = Input.GetAxis ("Horizontal");
-        if (sideLeft && horizontalDirection < 0) {
-            horizontalDirection = 0;
-        }
-        if (sideRight && horizontalDirection > 0) {
-            horizontalDirection = 0;
+        if (horizontalDirection < 0) {
+            if (!spriteRenderer.flipX) { spriteRenderer.flipX = true; }  
+            if (sideLeft) {
+                horizontalDirection = 0;
+            }
+        } else if (horizontalDirection > 0) {
+            if (spriteRenderer.flipX) { spriteRenderer.flipX = false; }
+            if (sideRight) {
+                horizontalDirection = 0;
+            }
         }
 
         if (!isGrounded) {
@@ -54,7 +62,7 @@ public class PlatformerMovement : MonoBehaviour {
         Debug.Log (verticalSpeed);
         foreach (RaycastHit2D ray in nodeRays) {
             if (ray && verticalSpeed <= 0) {
-                float distance = ray.collider.transform.localScale.y / 2;
+                float distance = ray.collider.transform.localScale.y * ray.collider.bounds.size.y / 2;
                 float difference = (leftNode.y - ray.collider.transform.position.y) - distance;
                 if (Mathf.Abs(difference) <= 0.15f) {
                     transform.Translate (0, -difference, 0);
