@@ -174,11 +174,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4671392952616286, guid: e558f6b686dc70941907e6985b99b6a7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -6.5
+      value: -7.5
       objectReference: {fileID: 0}
     - target: {fileID: 4671392952616286, guid: e558f6b686dc70941907e6985b99b6a7, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4671392952616286, guid: e558f6b686dc70941907e6985b99b6a7, type: 2}
       propertyPath: m_LocalPosition.z
@@ -217,6 +217,11 @@ Prefab:
         type: 2}
       propertyPath: m_CollisionDetection
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114264720187227154, guid: e558f6b686dc70941907e6985b99b6a7,
+        type: 2}
+      propertyPath: rayDetectionDistance
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e558f6b686dc70941907e6985b99b6a7, type: 2}
@@ -259,6 +264,10 @@ Prefab:
     - target: {fileID: 4592520792575424, guid: f5a3bc957bb7d1a429a42b8e86626922, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4592520792575424, guid: f5a3bc957bb7d1a429a42b8e86626922, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f5a3bc957bb7d1a429a42b8e86626922, type: 2}
