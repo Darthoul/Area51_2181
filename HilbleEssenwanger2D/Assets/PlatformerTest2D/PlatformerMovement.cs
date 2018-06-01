@@ -16,14 +16,57 @@ public class PlatformerMovement : MonoBehaviour {
     bool isGrounded;
 
     SpriteRenderer spriteRenderer;
+    Rigidbody2D rigidbody;
+
+    public bool usesRigidbody;
 
 	// Use this for initialization
 	void Start () {
         spriteRenderer = GetComponent<SpriteRenderer> ();
+        rigidbody = GetComponent<Rigidbody2D> ();
+        if (!usesRigidbody) {
+            rigidbody.Sleep ();
+        }
 	}
-	
+
+    void Update () {
+        if (usesRigidbody) {
+            RigidBodyUpdate ();
+        } else {
+            TransformUpdate ();
+        }
+    }
+
+    void RigidBodyUpdate () {
+        rigidbody.velocity = new Vector2 (0, rigidbody.velocity.y);
+        RaycastHit2D downLeft = Physics2D.Raycast (leftNode, Vector3.down, rayDetectionDistance);
+        RaycastHit2D downRight = Physics2D.Raycast (rightNode, Vector3.down, rayDetectionDistance);
+
+        float horizontalDirection = Input.GetAxis ("Horizontal");
+        if (horizontalDirection < 0) {
+            if (!spriteRenderer.flipX) { spriteRenderer.flipX = true; }
+        } else if (horizontalDirection > 0) {
+            if (spriteRenderer.flipX) { spriteRenderer.flipX = false; }
+        }
+        if (isGrounded) {
+            if (!downLeft && !downRight) {
+                isGrounded = false;
+            } else if (Input.GetKeyDown (KeyCode.Space)) {
+                verticalSpeed = jumpForce;
+                rigidbody.AddForce (Vector2.up * jumpForce, ForceMode2D.Impulse);
+                isGrounded = false;
+            }
+        } else {
+            if (downLeft || downRight) {
+                isGrounded = true;
+            }
+        }
+
+        rigidbody.velocity = new Vector2 (horizontalDirection * horizontalSpeed, rigidbody.velocity.y);
+    }
+
 	// Update is called once per frame
-	void Update () {
+	void TransformUpdate () {
 
         RaycastHit2D downLeft = Physics2D.Raycast (leftNode, Vector3.down, rayDetectionDistance);
         RaycastHit2D downRight = Physics2D.Raycast (rightNode, Vector3.down, rayDetectionDistance);

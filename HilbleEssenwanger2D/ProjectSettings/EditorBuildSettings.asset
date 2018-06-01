@@ -4,4 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/PlatformerTest2D/MainMenu.unity
+    guid: a1fa7ad222f564ae8a50027ed314d0df
+  - enabled: 1
+    path: Assets/PlatformerTest2D/Level01.unity
+    guid: c697b06fb7198ad408f9f60f41ffffcf
+  - enabled: 1
+    path: Assets/PlatformerTest2D/Level02.unity
+    guid: cab71079c1aff49b9a0b0c4367a04bff
+  m_configObjects: {}
