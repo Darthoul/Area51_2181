@@ -6,6 +6,7 @@ public class PlayerScript : MonoBehaviour {
 
     public float maxHP = 1f;
     public float currentHP;
+    public PowerBallBehaviour currentPower;
 
     public float normalizedHP { get { return currentHP / maxHP; } }
 
