@@ -10,12 +10,19 @@ public class BasicEnemy : EnemyObject {
     public Vector3 planarTargetDistance { get { return new Vector3 (target.transform.position.x, transform.position.y, target.transform.position.z); }}
     public float colorIndex = 0f;
     public Gradient damageGradient;
+    public Renderer enemyRenderer;
+
+    void Start () {
+        enemyRenderer = transform.GetChild (1).GetComponent<Renderer> ();
+    }
 
     void Update () {
         if (target != null) {
             transform.forward = (planarTargetDistance - transform.position).normalized;
         }
-        transform.GetChild(1).GetComponent<Renderer> ().material.color = damageGradient.Evaluate (colorIndex);
+        for (int i = 0; i < enemyRenderer.materials.Length; i++) {
+            enemyRenderer.materials[i].color = damageGradient.Evaluate (colorIndex);
+        }
     }
 
     public override void TakeDamage () {

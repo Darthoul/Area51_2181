@@ -377,6 +377,74 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 30.000002}
+--- !u!1 &352902246
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 352902247}
+  - component: {fileID: 352902249}
+  - component: {fileID: 352902248}
+  m_Layer: 5
+  m_Name: RestartPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &352902247
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 352902246}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1665507122}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &352902248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 352902246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: ebf757ffa0c9da34fb4c8488d877ac8b, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &352902249
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 352902246}
 --- !u!1 &379470266
 GameObject:
   m_ObjectHideFlags: 0
@@ -1892,25 +1960,25 @@ MonoBehaviour:
   colorIndex: 0
   damageGradient:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 0.5943396, g: 0, b: 0, a: 1}
-    key2: {r: 0.65790135, g: 0.15668707, b: 0.15668707, a: 0}
-    key3: {r: 1, g: 1, b: 1, a: 0}
+    key0: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 0.4509804}
+    key1: {r: 0.5943396, g: 0, b: 0, a: 0.7254902}
+    key2: {r: 0.65790135, g: 0.15668707, b: 0.15668707, a: 0.4509804}
+    key3: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 7710
-    ctime2: 24479
+    ctime1: 3470
+    ctime2: 23323
     ctime3: 65535
     ctime4: 0
     ctime5: 0
     ctime6: 0
     ctime7: 0
     atime0: 0
-    atime1: 65535
-    atime2: 0
+    atime1: 5397
+    atime2: 65535
     atime3: 0
     atime4: 0
     atime5: 0
@@ -1918,7 +1986,8 @@ MonoBehaviour:
     atime7: 0
     m_Mode: 0
     m_NumColorKeys: 4
-    m_NumAlphaKeys: 2
+    m_NumAlphaKeys: 3
+  enemyRenderer: {fileID: 0}
 --- !u!1 &1278925229
 GameObject:
   m_ObjectHideFlags: 0
@@ -2059,6 +2128,10 @@ Prefab:
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 1724229361}
+    - target: {fileID: 1866929883802526, guid: 549c75492f4ec41d298546f2b37b26b5, type: 2}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114982113621782872, guid: 549c75492f4ec41d298546f2b37b26b5, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 549c75492f4ec41d298546f2b37b26b5, type: 2}
@@ -2194,6 +2267,7 @@ RectTransform:
   m_Children:
   - {fileID: 379470267}
   - {fileID: 1856318414}
+  - {fileID: 352902247}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2214,7 +2288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpBar: {fileID: 379470268}
-  playerScript: {fileID: 1724229361}
+  playerScript: {fileID: 0}
   barColors:
     serializedVersion: 2
     key0: {r: 1, g: 0.0047169924, b: 0.48158863, a: 1}
@@ -2244,6 +2318,8 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
+  restartPanel: {fileID: 352902248}
+  restartSpeed: 3.5
 --- !u!1 &1724229355 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1866929883802526, guid: 549c75492f4ec41d298546f2b37b26b5,
