@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour {
     public Image restartPanel;
     public float restartSpeed;
 
+    bool isLoading = false;
+
     void Awake () {
         if (instance == null) {
             instance = this;
@@ -39,7 +41,8 @@ public class UIManager : MonoBehaviour {
             hpBar.fillAmount = Mathf.MoveTowards (hpBar.fillAmount, playerScript.normalizedHP, 2f * delta * Time.deltaTime);
             hpBar.color = barColors.Evaluate (hpBar.fillAmount);
         }
-        if (Input.GetKeyDown (KeyCode.T)) {
+        if (!isLoading && Input.GetKeyDown (KeyCode.T)) {
+            isLoading = true;
             StartCoroutine (RestartProcess ());
         }
 	}
@@ -64,6 +67,7 @@ public class UIManager : MonoBehaviour {
             restartPanel.color = FadeColorAlpha (restartPanel.color, 0, restartSpeed * Time.deltaTime);
             yield return null;
         }
+        isLoading = false;
         yield return null;
     }
 

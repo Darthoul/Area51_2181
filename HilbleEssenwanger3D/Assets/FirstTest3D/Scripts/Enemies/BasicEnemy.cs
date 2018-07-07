@@ -36,5 +36,8 @@ public class BasicEnemy : EnemyObject {
 
     public void ResetInvulnerable () {
         invulnerable = false;
+        if (health <= 0) {
+            Destroy (gameObject);
+        }
     }
 }
