@@ -1526,39 +1526,9 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 1603045484}
-    - target: {fileID: 65286129641521610, guid: 1857283192f7645f2bc18c3b9f061405,
-        type: 2}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 65286129641521610, guid: 1857283192f7645f2bc18c3b9f061405,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1857283192f7645f2bc18c3b9f061405, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &639415729 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1972743517973230, guid: 1857283192f7645f2bc18c3b9f061405,
-    type: 2}
-  m_PrefabInternal: {fileID: 627062515}
---- !u!54 &639415737
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 639415729}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &654023816
 GameObject:
   m_ObjectHideFlags: 0
@@ -2361,6 +2331,7 @@ GameObject:
   - component: {fileID: 1665507120}
   - component: {fileID: 1665507119}
   - component: {fileID: 1665507123}
+  - component: {fileID: 1665507124}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2490,6 +2461,20 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   restartPanel: {fileID: 352902248}
   restartSpeed: 3.5
+--- !u!114 &1665507124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1665507118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9d5e8a6c2a4a4fd6a632c369b815391, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inactive: []
+  active: []
+  completed: []
 --- !u!1 &1724229355 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1866929883802526, guid: 549c75492f4ec41d298546f2b37b26b5,

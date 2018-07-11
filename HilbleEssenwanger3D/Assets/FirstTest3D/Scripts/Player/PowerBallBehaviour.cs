@@ -11,6 +11,8 @@ public class PowerBallBehaviour : MonoBehaviour {
     public readonly Vector3 idlePoint = new Vector3 (0.5f, 0.75f, 0f);
     public readonly Vector3 center = new Vector3 (0f, 0.75f, 0f);
 
+    public string powerName;
+
     bool waitForNextAction = false;
     public bool isWaiting { get { return waitForNextAction; }}
 
