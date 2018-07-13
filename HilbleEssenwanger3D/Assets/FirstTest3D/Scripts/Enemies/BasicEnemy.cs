@@ -37,6 +37,7 @@ public class BasicEnemy : EnemyObject {
     public void ResetInvulnerable () {
         invulnerable = false;
         if (health <= 0) {
+            QuestManager.instance.Check ("destroy", name);
             Destroy (gameObject);
         }
     }

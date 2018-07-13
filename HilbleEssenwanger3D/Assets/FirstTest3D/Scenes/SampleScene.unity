@@ -225,7 +225,7 @@ Transform:
   m_Children:
   - {fileID: 957882537}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &209524487
 GameObject:
@@ -2139,6 +2139,36 @@ MonoBehaviour:
   moveSpeed: 4
   targetDistance: {x: 0, y: 3.5, z: -4}
   target: {fileID: 1724229356}
+--- !u!1 &1380446427
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1380446428}
+  m_Layer: 0
+  m_Name: Gates
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1380446428
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1380446427}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 7, z: 7}
+  m_Children:
+  - {fileID: 2103018740}
+  - {fileID: 2059662017}
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1385867785
 Prefab:
   m_ObjectHideFlags: 0
@@ -2317,7 +2347,7 @@ Transform:
   m_LocalScale: {x: 7, y: 1, z: 7}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1665507118
 GameObject:
@@ -2332,6 +2362,7 @@ GameObject:
   - component: {fileID: 1665507119}
   - component: {fileID: 1665507123}
   - component: {fileID: 1665507124}
+  - component: {fileID: 1665507125}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2472,9 +2503,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d5e8a6c2a4a4fd6a632c369b815391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questActions: {fileID: 1665507125}
   inactive: []
   active: []
   completed: []
+--- !u!114 &1665507125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1665507118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef6596f3c41724ac2a89bcd23f328216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1724229355 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1866929883802526, guid: 549c75492f4ec41d298546f2b37b26b5,
@@ -2585,7 +2628,7 @@ GameObject:
   - component: {fileID: 2059662015}
   - component: {fileID: 2059662014}
   m_Layer: 0
-  m_Name: Platform (7)
+  m_Name: GateRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2652,11 +2695,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2059662013}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 7, z: 7}
+  m_LocalPosition: {x: 14, y: 0.14285713, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_Father: {fileID: 1380446428}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2103018736
 GameObject:
@@ -2670,7 +2713,7 @@ GameObject:
   - component: {fileID: 2103018738}
   - component: {fileID: 2103018737}
   m_Layer: 0
-  m_Name: Platform (6)
+  m_Name: GateLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2737,9 +2780,9 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2103018736}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 7, z: 7}
+  m_LocalPosition: {x: -14, y: 0.14285713, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_Father: {fileID: 1380446428}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
