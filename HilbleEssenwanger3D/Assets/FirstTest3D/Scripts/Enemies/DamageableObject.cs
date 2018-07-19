@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyObject : MonoBehaviour {
+public class DamageableObject : MonoBehaviour {
 
     public virtual void TakeDamage () {
-        
+
     }
 }

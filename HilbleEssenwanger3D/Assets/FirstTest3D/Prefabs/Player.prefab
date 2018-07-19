@@ -341,6 +341,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1408676635506334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4038941255872408}
+  m_Layer: 0
+  m_Name: PowerContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1413048817000124
 GameObject:
   m_ObjectHideFlags: 1
@@ -579,10 +594,10 @@ GameObject:
   - component: {fileID: 136243051259630954}
   - component: {fileID: 95179031569684160}
   - component: {fileID: 114235723711465242}
-  - component: {fileID: 114982113621782872}
+  - component: {fileID: 114250892738220668}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -657,6 +672,19 @@ Transform:
   - {fileID: 4619378678270608}
   m_Father: {fileID: 4492709082340964}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4038941255872408
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1408676635506334}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4611545323958206}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4045262331099950
 Transform:
@@ -993,6 +1021,7 @@ Transform:
   m_Children:
   - {fileID: 4688030603036206}
   - {fileID: 4442821566736794}
+  - {fileID: 4038941255872408}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1228,7 +1257,8 @@ MonoBehaviour:
   movementSpeed: 7
   rigidbodyComponent: {fileID: 54566374901256116}
   animatorController: {fileID: 95179031569684160}
---- !u!114 &114982113621782872
+  playerScript: {fileID: 114250892738220668}
+--- !u!114 &114250892738220668
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1239,6 +1269,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98d0b5008a4804e05a1f984277d2e89b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 150
+  currentHP: 150
+  currentPower: {fileID: 0}
 --- !u!136 &136243051259630954
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -52,7 +52,7 @@ public class PowerBallBehaviour : MonoBehaviour {
 
     void OnTriggerEnter (Collider other) {
         if (other.CompareTag("Damageable")) {
-            other.GetComponent<EnemyObject> ().TakeDamage ();
+            other.GetComponent<DamageableObject> ().TakeDamage ();
         }
     }
 }
