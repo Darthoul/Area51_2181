@@ -10,14 +10,32 @@ public class EnemyEntity : DamageableObject {
     public Gradient damageGradient;
     public Renderer enemyRenderer;
 
-    void Start () {
+    public FSM enemyStateMachine;
+
+    public delegate void EnemyBehaviour ();
+    public event EnemyBehaviour currentBehaviour;
+
+    protected virtual void Start () {
         enemyRenderer = transform.GetChild (1).GetComponent<Renderer> ();
+    }
+
+    protected virtual void Update () {
+        Debug.Log ("Updating parent");
+        if (currentBehaviour != null) {
+            currentBehaviour ();
+        }
     }
 
     protected void SetRenderColor (float gradientPick) {
         for (int i = 0; i < enemyRenderer.materials.Length; i++) {
             enemyRenderer.materials[i].color = damageGradient.Evaluate (gradientPick);
         }
+    }
+    protected void SetCurrentBehaviour (EnemyBehaviour enemyBehaviour) {
+        currentBehaviour = enemyBehaviour;
+    }
+    protected virtual void SendEnemyEvent (int eventIndex) {
+        enemyStateMachine.SendEvent (eventIndex);
     }
 
     public override void TakeDamage () {
@@ -35,5 +53,13 @@ public class EnemyEntity : DamageableObject {
             QuestManager.instance.Check ("destroy", name);
             Destroy (gameObject);
         }
+    }
+
+    //OnTriggerEvent Unity Functions
+    public virtual void TriggerEnterCall (GameObject objRef) {
+        //EMPTY (Call on children only)
+    }
+    public virtual void TriggerExitCall (GameObject objRef) {
+        //EMPTY (Call on children only)
     }
 }
