@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DamageableObject : MonoBehaviour {
 
-    public virtual void TakeDamage () {
+    public virtual void TakeDamage (string effectName = null) {
 
     }
 }
