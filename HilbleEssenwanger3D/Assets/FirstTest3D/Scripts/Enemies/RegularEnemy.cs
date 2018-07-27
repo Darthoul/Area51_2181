@@ -48,8 +48,11 @@ public class RegularEnemy : EnemyEntity {
 
     void Follow () {
         Debug.Log ("Following a target");
-        transform.forward = (planarTargetDistance - transform.position).normalized;
-        transform.position += transform.forward * speed * Time.deltaTime;
+        Vector3 currentTargetDistance = planarTargetDistance - transform.position;
+        if (currentTargetDistance.magnitude >= 3f) {
+            transform.forward = (currentTargetDistance).normalized;
+            transform.position += transform.forward * speed * Time.deltaTime;
+        }
         if (!insideFollowReach) {
             currentFollowTime += Time.deltaTime;
         }

@@ -16,6 +16,9 @@ public class UIManager : MonoBehaviour {
 
     bool isLoading = false;
 
+    public CamBehaviour camBehaviour;
+    CamBehaviour.CamData defaultData;
+
     void Awake () {
         if (instance == null) {
             instance = this;
@@ -29,7 +32,7 @@ public class UIManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         if (playerScript == null) {
-            playerScript = FindPlayerInstance ();
+            InitGameScripts ();
         }
 	}
 	
@@ -44,6 +47,13 @@ public class UIManager : MonoBehaviour {
         if (!isLoading && Input.GetKeyDown (KeyCode.T)) {
             isLoading = true;
             StartCoroutine (RestartProcess ());
+        }
+        if (!isLoading && Input.GetKeyDown (KeyCode.M)) {
+            if (camBehaviour.GetCamData ().CompareValues (defaultData)) {
+                camBehaviour.SetCamData (new CamBehaviour.CamData (17f, Vector3.up * 25f, GameObject.Find ("Platform_Base").transform));
+            } else {
+                camBehaviour.SetCamData (defaultData);
+            }
         }
 	}
 
@@ -61,7 +71,7 @@ public class UIManager : MonoBehaviour {
             yield return null;
         }
 
-        playerScript = FindPlayerInstance ();
+        InitGameScripts ();
 
         while (restartPanel.color.a != 0) {
             restartPanel.color = FadeColorAlpha (restartPanel.color, 0, restartSpeed * Time.deltaTime);
@@ -77,5 +87,11 @@ public class UIManager : MonoBehaviour {
 
     PlayerScript FindPlayerInstance () {
         return GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerScript> ();
+    }
+
+    void InitGameScripts () {
+        playerScript = FindPlayerInstance ();
+        camBehaviour = Camera.main.GetComponent<CamBehaviour> ();
+        defaultData = camBehaviour.GetCamData ();
     }
 }

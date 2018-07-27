@@ -34,9 +34,13 @@ public class EnemyEntity : DamageableObject {
         if (effect != null) {
             if (effect.Update (Time.deltaTime)) {
                 currentBase = baseColor;
+                ApplyColor (currentBase);
                 speed = 4.5f;
                 effect = null;
             }
+        }
+        if (Input.GetKeyDown(KeyCode.C)) {
+            Debug.LogWarning (changedBaseColor);
         }
     }
 
@@ -44,9 +48,12 @@ public class EnemyEntity : DamageableObject {
         if (changedBaseColor || gradientPick != 0f) {
             Color targetColor = damageGradient.Evaluate (gradientPick);
             if (changedBaseColor) { targetColor = (targetColor * 0.7f) + (currentBase * 0.3f); }
-            for (int i = 0; i < enemyRenderer.materials.Length; i++) {
-                enemyRenderer.materials[i].color = targetColor;
-            }
+            ApplyColor (targetColor);
+        }
+    }
+    protected void ApplyColor (Color targetColor) {
+        for (int i = 0; i < enemyRenderer.materials.Length; i++) {
+            enemyRenderer.materials[i].color = targetColor;
         }
     }
     protected void SetCurrentBehaviour (EnemyBehaviour enemyBehaviour) {
