@@ -7,6 +7,8 @@ public class PlayerScript : MonoBehaviour {
     public float maxHP = 1f;
     public float currentHP;
     public PowerBallBehaviour currentPower;
+    bool sightMode;
+    public bool isSightMode { get { return sightMode; }}
 
     public float normalizedHP { get { return currentHP / maxHP; } }
 
@@ -14,13 +16,8 @@ public class PlayerScript : MonoBehaviour {
     public void ModifyHP (float addValue) {
         currentHP = Mathf.Clamp (currentHP + addValue, 0, maxHP);
     }
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public void SetSightMode (bool status) {
+        sightMode = status;
+    }
 }

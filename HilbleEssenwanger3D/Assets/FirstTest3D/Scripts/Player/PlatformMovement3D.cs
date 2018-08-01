@@ -59,7 +59,11 @@ public class PlatformMovement3D : MonoBehaviour {
     }
 
     void Attack() {
-        playerScript.currentPower.AttackRoundAbout ();
+        if (!playerScript.isSightMode) {
+            playerScript.currentPower.AttackRoundAbout ();
+        } else {
+            playerScript.currentPower.AttackLongShot ();
+        }
     }
 
     float NormalizeMovement (float targetMovement) {

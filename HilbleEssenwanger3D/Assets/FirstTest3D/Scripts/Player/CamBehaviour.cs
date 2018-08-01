@@ -8,11 +8,13 @@ public class CamBehaviour : MonoBehaviour {
         public float moveSpeed;
         public Vector3 targetDistance;
         public Transform target;
+        public bool usePlayerForward;
 
-        public CamData (float moveSpeed, Vector3 targetDistance, Transform target) {
+        public CamData (float moveSpeed, Vector3 targetDistance, Transform target, bool usePlayerForward = false) {
             this.moveSpeed = moveSpeed;
             this.targetDistance = targetDistance;
             this.target = target;
+            this.usePlayerForward = usePlayerForward;
         }
 
         public bool CompareValues (CamData otherData) {
@@ -25,13 +27,20 @@ public class CamBehaviour : MonoBehaviour {
     public float moveSpeed;
     public Vector3 targetDistance;
     public Transform target;
+    public bool usePlayerForward;
     Vector3 targetNode;
 
 	// Update is called once per frame
 	void LateUpdate () {
         targetNode = target.position + (target.right * targetDistance.x) + (target.up * targetDistance.y) + (target.forward * targetDistance.z);
         transform.position = Vector3.MoveTowards (transform.position, targetNode, moveSpeed * Time.deltaTime);
-        transform.LookAt (target.position + Vector3.up * 1.5f);
+        Vector3 lookAtPoint = target.position + Vector3.up * 1.5f;
+
+        if (!usePlayerForward) {
+            transform.LookAt (lookAtPoint);
+        } else {
+            transform.LookAt (lookAtPoint, target.forward);
+        }
     }
 
     void OnDrawGizmos () {
@@ -42,6 +51,7 @@ public class CamBehaviour : MonoBehaviour {
         moveSpeed = camData.moveSpeed;
         targetDistance = camData.targetDistance;
         target = camData.target;
+        usePlayerForward = camData.usePlayerForward;
     }
 
     public CamData GetCamData () {

@@ -48,12 +48,21 @@ public class UIManager : MonoBehaviour {
             isLoading = true;
             StartCoroutine (RestartProcess ());
         }
-        if (!isLoading && Input.GetKeyDown (KeyCode.M)) {
+        /*if (!isLoading && Input.GetKeyDown (KeyCode.M)) {
             if (camBehaviour.GetCamData ().CompareValues (defaultData)) {
-                camBehaviour.SetCamData (new CamBehaviour.CamData (17f, Vector3.up * 25f, GameObject.Find ("Platform_Base").transform));
+                camBehaviour.SetCamData (new CamBehaviour.CamData (17f, Vector3.up * 25f, GameObject.FindWithTag ("Player").transform, true)); //GameObject.Find ("Platform_Base").transform));
             } else {
                 camBehaviour.SetCamData (defaultData);
             }
+        }*/
+        if (!isLoading && Input.GetKeyDown (KeyCode.N)) {
+            camBehaviour.SetCamData (new CamBehaviour.CamData (20f, new Vector3 (1f, 2f, -4.75f), defaultData.target.Find ("LongTarget")));
+            playerScript.currentPower.SetAlpha (0.25f);
+            playerScript.SetSightMode (true);
+        } else if (!isLoading && Input.GetKeyUp (KeyCode.N)) {
+            camBehaviour.SetCamData (defaultData);
+            playerScript.currentPower.SetAlpha (1f);
+            playerScript.SetSightMode (false);
         }
 	}
 

@@ -37,11 +37,41 @@ public class PowerBallBehaviour : MonoBehaviour {
         GetComponent<Animator> ().SetFloat ("idleSpeed", 0.5f);
     }
 
+    public void SetAlpha (float alpha) {
+        Color color = GetComponent<Renderer> ().material.color;
+        color.a = alpha;
+        GetComponent<Renderer> ().material.color = color;
+    }
+
     public void AttackRoundAbout () {
         waitForNextAction = true;
         transform.parent.localPosition = center;
         GetComponent<Animator> ().SetTrigger ("Roundabout");
         damageArea.enabled = true;
+    }
+    public void AttackLongShot () {
+        waitForNextAction = true;
+        transform.parent.localPosition = center + (Vector3.forward * 0.25f);
+        GetComponent<Animator> ().enabled = false;
+        StartCoroutine (LongShotRoutine (transform.position + (Vector3.forward * 7.25f)));
+        damageArea.enabled = true;
+    }
+    IEnumerator LongShotRoutine (Vector3 targetPoint) {
+        Vector3 origin = transform.position;
+        SetAlpha (1f);
+        while (transform.position != targetPoint) {
+            transform.position = Vector3.MoveTowards (transform.position, targetPoint, 10.5f * Time.deltaTime);
+            yield return null;
+        }
+
+        while (transform.position != origin) {
+            transform.position = Vector3.MoveTowards (transform.position, origin, 8.5f * Time.deltaTime);
+            yield return null;
+        }
+        SetAlpha (0.25f);
+        GetComponent<Animator> ().enabled = true;
+        ResetPoint ();
+        yield return null;
     }
 
     public void ResetPoint () {
