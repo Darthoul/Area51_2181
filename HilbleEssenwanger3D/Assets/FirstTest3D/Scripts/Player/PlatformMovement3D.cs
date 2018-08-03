@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformMovement3D : MonoBehaviour {
+public class PlatformMovement3D : MovementControl {
 
-    public float angularSpeed;
-    public float movementSpeed;
+    public float angularSpeed = 75;
+    public float movementSpeed = 8;
     public Rigidbody rigidbodyComponent;
     Vector3 movement;
     Quaternion rotation;
@@ -17,13 +17,19 @@ public class PlatformMovement3D : MonoBehaviour {
 
     List<Collider> groundCollection;
 
+    public override void Awake (Transform transform) {
+        rigidbodyComponent = transform.GetComponent<Rigidbody> ();
+        animatorController = transform.GetComponent<Animator> ();
+        playerScript = transform.GetComponent<PlayerScript> ();
+    }
+
 	// Use this for initialization
-	void Start () {
+	public override void Start () {
         groundCollection = new List<Collider> ();
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+    public override void FixedUpdate (ref Transform transform) {
 
         movement = transform.position;
         rotation = rigidbodyComponent.rotation;
@@ -49,7 +55,7 @@ public class PlatformMovement3D : MonoBehaviour {
         rigidbodyComponent.MoveRotation (rotation);
 	}
 
-    void Update () {
+    public override void Update (ref Transform transform) {
         if (Input.GetKeyDown(KeyCode.Space) && grounded) {
             rigidbodyComponent.AddForce (Vector3.up * 5f, ForceMode.Impulse);
             playerScript.ModifyHP (-20);
@@ -70,12 +76,12 @@ public class PlatformMovement3D : MonoBehaviour {
         return (targetMovement + 1f) / 2f;
     }
 
-    void OnTriggerEnter (Collider other) {
+    public void OnTriggerEnter (Collider other) {
         if (other.CompareTag("Power")) {
             PowerBallBehaviour targetPower = other.GetComponent<PowerBallBehaviour> ();
             if (playerScript.currentPower != null || playerScript.currentPower != targetPower) {
                 if (playerScript.currentPower != null && playerScript.currentPower != targetPower) {
-                    Destroy (playerScript.currentPower.gameObject);
+                    Object.Destroy (playerScript.currentPower.gameObject);
                 }
                 playerScript.currentPower = targetPower;
                 targetPower.AssignActivePlayer (this);
@@ -84,7 +90,7 @@ public class PlatformMovement3D : MonoBehaviour {
         }
     }
 
-    void OnCollisionStay (Collision collision) {
+    public void OnCollisionStay (Collision collision) {
         if (!groundCollection.Contains (collision.collider)) {
             foreach (ContactPoint contact in collision.contacts) {
                 Debug.DrawRay (contact.point, contact.normal * 5f, Color.red, 1f);
@@ -99,7 +105,7 @@ public class PlatformMovement3D : MonoBehaviour {
         }
     }
 
-    void OnCollisionExit (Collision collision) {
+    public void OnCollisionExit (Collision collision) {
         if (groundCollection.Contains(collision.collider)) {
             groundCollection.Remove (collision.collider);
         }

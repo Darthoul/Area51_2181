@@ -34,6 +34,7 @@ public class UIManager : MonoBehaviour {
         if (playerScript == null) {
             InitGameScripts ();
         }
+        ControlManager.instance.
 	}
 	
 	// Update is called once per frame

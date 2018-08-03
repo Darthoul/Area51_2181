@@ -594,6 +594,7 @@ GameObject:
   - component: {fileID: 136243051259630954}
   - component: {fileID: 95179031569684160}
   - component: {fileID: 114235723711465242}
+  - component: {fileID: 114457054661865342}
   - component: {fileID: 114250892738220668}
   m_Layer: 0
   m_Name: Player
@@ -1272,6 +1273,17 @@ MonoBehaviour:
   maxHP: 150
   currentHP: 150
   currentPower: {fileID: 0}
+--- !u!114 &114457054661865342
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1866929883802526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da03467dc3364415899cdcac0eff29a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &136243051259630954
 CapsuleCollider:
   m_ObjectHideFlags: 1

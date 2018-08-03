@@ -53,19 +53,18 @@ public class PowerBallBehaviour : MonoBehaviour {
         waitForNextAction = true;
         transform.parent.localPosition = center + (Vector3.forward * 0.25f);
         GetComponent<Animator> ().enabled = false;
-        StartCoroutine (LongShotRoutine (transform.position + (Vector3.forward * 7.25f)));
+        StartCoroutine (LongShotRoutine (transform.position + (transform.forward * 7.25f)));
         damageArea.enabled = true;
     }
     IEnumerator LongShotRoutine (Vector3 targetPoint) {
-        Vector3 origin = transform.position;
         SetAlpha (1f);
         while (transform.position != targetPoint) {
             transform.position = Vector3.MoveTowards (transform.position, targetPoint, 10.5f * Time.deltaTime);
             yield return null;
         }
 
-        while (transform.position != origin) {
-            transform.position = Vector3.MoveTowards (transform.position, origin, 8.5f * Time.deltaTime);
+        while (transform.localPosition != Vector3.zero) {
+            transform.localPosition = Vector3.MoveTowards (transform.localPosition, Vector3.zero, 8.5f * Time.deltaTime);
             yield return null;
         }
         SetAlpha (0.25f);
